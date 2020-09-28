@@ -59,6 +59,7 @@ def make_list_of_info(path: str, name: str, which_list=1):
 
 
 class WorkDocFileRenamer:
+    """Only works if file named in proper way"""
     def __init__(self, name: str, path=(Path.home() / 'Desktop/poop')):
         self.name = name
         self.extension = '.' + str(name.split('.')[-1])
