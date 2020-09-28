@@ -99,7 +99,7 @@ class WorkDocFileRenamer:
             # if len(name_split) == 4:
             #     contract_number = self.name.split('.')[0].split()[3] # for version2
             # version2 new_name = contract_number + '/' + year + '-ЭПБ-20-' + the_number
-            temp = make_dict_from_2columns_in_exel(Path.home() / 'Desktop/poop', '23.xlsx', 3, 1, 5)  # FIXME Hardcode
+            temp = make_dict_from_2columns_in_exel(str(Path.home() / 'Desktop/poop'), '23.xlsx', 3, 1, 5)  # FIXME Hardcode
             list_for_rename = dict(ННК=temp)
             new_name = (str(the_number)
                         + '.'
