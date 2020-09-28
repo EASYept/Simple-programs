@@ -190,8 +190,8 @@ def main_function(path_to_files=Path.home() / 'Desktop/poop'):
             print("It's should be a number")
 
     chosen_file = WorkDocFileRenamer(list_of_files[chosen_file], path_to_files)
-    x = chosen_file.destination_for_docx()
-    chosen_file.move(x)
+    for_move_funct = chosen_file.destination_for_docx()
+    chosen_file.move(for_move_funct)
     chosen_file.rename_docx()
     chosen_file.create_txt_with_info(TEMP_EXEL_PATH, TEMP_EXEL, 3)
     chosen_file.create_dwg_template(PATH_TO_FILES)
