@@ -10,7 +10,7 @@
         +new_name
         +info
 5. Default things to do:
-    - Move(desination) -> Ask "Move it here? print(destination)
+    - Move(destination) -> Ask "Move it here? print(destination) FIXME
     - Rename() -> apply new_name
     - create info.txt
     - create .DWG file with template(шаблон)
@@ -122,8 +122,8 @@ class WorkDocFileRenamer:
         self.path = destination
         self.full_path = str(self.path) + '/' + self.name
 
-    def destination_for_docx(self):  # FIXME just a concept for now
-        """:returns path for work docx"""
+    def destination_for_docx(self):
+        """:returns path for file"""
         destination = str(DESTINATION_ROOT / self.factory / 'Материалы' / self.number)
         return destination
 
@@ -157,16 +157,22 @@ class WorkDocFileRenamer:
             the_number = self.name.split('.')[0]
 
         sheet_for_info = make_list_of_info(path_to_exel, name_of_exel, which_list)
-        the_number = int(the_number) + 3  # FIXME HARDCODE
+        the_number = int(the_number) + 3  # FIXME HARDCODE (make it so it's find row by it self(list->find->get index)
 
         list_for_info = sheet_for_info.row(the_number)
         default_list = ['Цех:', '\nИнв.№:', '\nОбъем:']
         default_list_values = [list_for_info[2], list_for_info[3], list_for_info[5]]
 
-        txt = open(self.path / "info.txt", "w+")
+        txt = open(str(self.path) + "/info.txt", "w+")
         for i, j in zip(default_list, default_list_values):
             txt.write('{} {}'.format(i, j))
         txt.close()
+
+    def open_in_explorer(self):
+        os.startfile(self.path)
+
+    def create_dwg_template(self, place_from):  # FIXME template kinda hardcoded, isn't it?
+        shutil.copy(str(place_from) + '/template.dwg', str(self.path) + '/template.dwg')
 
 
 def main_function(path_to_files=Path.home() / 'Desktop/poop'):
@@ -184,10 +190,12 @@ def main_function(path_to_files=Path.home() / 'Desktop/poop'):
 
     chosen_file = WorkDocFileRenamer(list_of_files[chosen_file], path_to_files)
     x = chosen_file.destination_for_docx()
-    print(type(x))
     chosen_file.move(x)
-    #chosen_file.rename_docx()
-    #chosen_file.create_txt_with_info(TEMP_EXEL_PATH, TEMP_EXEL, 3)
+    chosen_file.rename_docx()
+    chosen_file.create_txt_with_info(TEMP_EXEL_PATH, TEMP_EXEL, 3)
+    chosen_file.create_dwg_template(PATH_TO_FILES)
+    chosen_file.open_in_explorer()
+
 
 
 if __name__ == '__main__':
