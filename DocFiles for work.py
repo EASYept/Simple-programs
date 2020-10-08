@@ -26,6 +26,8 @@ from pathlib import Path
 PATH_TO_FILES = Path.home() / 'Desktop/poop'
 DESTINATION_ROOT = Path.home() / 'Desktop/poop goes hear'
 
+DEFAULT_CONTRACT = '08'
+
 # for testing
 TEMP_EXEL = '23.xlsx'
 TEMP_EXEL_PATH = Path.home() / 'Desktop/poop'
@@ -69,6 +71,9 @@ class WorkDocFileRenamer:
         self.factory = self.name.split('.')[0].split()[0]
         self.year = self.name.split('.')[0].split()[1]
         self.number = self.name.split('.')[0].split()[2]
+        self.contract = DEFAULT_CONTRACT
+        if len(self.name.split('.')[0].split()) == 4:
+            self.contract = self.name.split('.')[0].split()[3]
 
     def show(self):
         return self.name
@@ -190,8 +195,8 @@ def main_function(path_to_files=Path.home() / 'Desktop/poop'):
             print("It's should be a number")
 
     chosen_file = WorkDocFileRenamer(list_of_files[chosen_file], path_to_files)
-    for_move_funct = chosen_file.destination_for_docx()
-    chosen_file.move(for_move_funct)
+    temp = chosen_file.destination_for_docx()
+    chosen_file.move(temp)
     chosen_file.rename_docx()
     chosen_file.create_txt_with_info(TEMP_EXEL_PATH, TEMP_EXEL, 3)
     chosen_file.create_dwg_template(PATH_TO_FILES)
