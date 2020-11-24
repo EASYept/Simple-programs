@@ -1,4 +1,12 @@
-"""Steps
+"""
+!SO THIS IS A FAIL PROJECT!
+because i didn't thought enough before start coding
+so whole concept of this is stupid
+
+why it's here?
+do remind me how much i done and how bad it was
+
+Steps
 1. Rename into specific way ( Factory_year_№_contract№ )
 2. Have default directory
     2.1 Put file in this directory
